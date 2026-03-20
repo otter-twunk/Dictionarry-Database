@@ -1,15 +1,14 @@
-name: Sync Upstream Dictionarry
+name: Sync Upstream Dictionarry (stable)
 on:
   schedule:
-    - cron: '0 */12 * * *'  # Every 12 hours (adjust as needed)
-  workflow_dispatch:  # Manual trigger button in GitHub Actions tab
+    - cron: '0 */12 * * *'  # Every 12 hours
+  workflow_dispatch:  # Manual trigger
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
     steps:
       - name: Checkout fork
         uses: actions/checkout@v4
@@ -18,14 +17,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: stable
 
-      - name: Merge upstream stable
-        uses: thiagokokada/merge-upstream@v1
+      - name: Merge Dictionarry stable
+        uses: thiagokokada/merge-upstream@v1.0.2
         with:
+          branch: stable
           upstream: Dictionarry-Hub/profilarr
           upstream-branch: stable
-          branch: stable
-          conflict-message: "Merge conflict, manual resolution needed"
-
-      - name: Push merged changes
-        run: |
-          git push origin stable
