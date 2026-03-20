@@ -1,8 +1,9 @@
 name: Sync Upstream Dictionarry (stable)
+
 on:
   schedule:
     - cron: '0 */12 * * *'  # Every 12 hours
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:
 
 jobs:
   sync:
@@ -14,12 +15,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
           ref: stable
 
-      - name: Merge Dictionarry stable
+      - name: Merge upstream stable into fork
         uses: thiagokokada/merge-upstream@v1.0.2
         with:
           branch: stable
           upstream: Dictionarry-Hub/profilarr
           upstream-branch: stable
+          github-token: ${{ secrets.GITHUB_TOKEN }}
