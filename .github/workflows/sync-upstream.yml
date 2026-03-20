@@ -19,7 +19,7 @@ jobs:
           ref: stable
 
       - name: Merge upstream stable
-        uses: mergifyio/merge-upstream@v1  # or thiagokokada/merge-upstream@v1
+        uses: thiagokokada/merge-upstream@v1
         with:
           upstream: Dictionarry-Hub/profilarr
           upstream-branch: stable
